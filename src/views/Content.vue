@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    主要内容
+    {{`${this.$route.params.nav} >> ${this.$route.params.navSub}`}}
   </div>
 </template>
 

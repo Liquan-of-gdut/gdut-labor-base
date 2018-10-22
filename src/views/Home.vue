@@ -13,9 +13,9 @@
             <div class="float-box margin-bottom">
                 <div class="news left">
                     <div class="box border-radius">
-                        <h2 class="news-header">
-                            <a href="http://www.cdqz.net/latest-list.html">基地动态</a>
-                            <a href="http://www.cdqz.net/latest-list.html" class="icon-more"></a>
+                        <h2 class="module-title news-header">
+                            <a href="#">基地动态 >></a>
+                            <a href="#" class="icon-more"></a>
                         </h2>
                         <div class="news-section">
                             <div class="news-top left">
@@ -106,9 +106,9 @@
                     </div>
                 </div>
                 <div class="notice right border-radius margin-bottom">
-                    <h2 class="notice-header">
-                        <a href="http://www.cdqz.net/list.html?categoryId=93">实践教学</a>
-                        <a href="http://www.cdqz.net/list.html?categoryId=93" class="icon-more"></a>
+                    <h2 class="module-title notice-header">
+                        <a href="#">实践教学 >></a>
+                        <a href="#" class="icon-more"></a>
                     </h2>
                     <div class="notice-section">
                         <ul class="notice-list">
@@ -180,8 +180,8 @@
             </div>
             <!--焦点关注-->
             <div class="focus border-radius margin-bottom">
-                <h2 class="title">
-                    <a href="#">课程建设</a>
+                <h2 class="module-title title">
+                    <a href="#">课程建设 >></a>
                     <a href="#" class="more">更多&gt;</a>
                 </h2>
                 <ul class="focus-list">

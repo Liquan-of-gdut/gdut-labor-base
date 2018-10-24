@@ -1,6 +1,10 @@
 <template>
   <div id="content">
-    {{`${this.$route.params.nav} >> ${this.$route.params.navSub}`}}
+    <div class="position-nav">{{
+      `当前位置： 首页 > ${this.$route.params.nav} > ${this.$route.params.navSub}`
+    }}</div>
+    <div class="left-nav"></div>
+    <div class="main"></div>
   </div>
 </template>
 

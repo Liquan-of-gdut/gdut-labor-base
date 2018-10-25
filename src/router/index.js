@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// import store from '../store'
 
 Vue.use(Router)
 
@@ -15,10 +16,19 @@ export const routes = [
   { path: '*', redirect: '/' }
 ]
 
-export default new Router({
+const router = new Router({
   routes: routes,
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
 })
+
+router.beforeEach((to, from, next) => {
+  // TODO：设置当前父导航（TODO：父导航的State值通过数值index设置即可）
+  // TODO：参数中存在时设置当前子导航，不存在时则默认第一个子导航（TODO：子导航的State值通过数值index设置即可）
+  console.log('当前路由参数：', to.params)
+  next()
+})
+
+export default router

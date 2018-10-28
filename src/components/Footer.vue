@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div class="footer full-width">
         <div class="footer-first">
             <div class="friendship-link container">
                 <h2 class="title">友情链接</h2>
@@ -24,8 +24,8 @@
         </div>
         <div class="footer-second">
             <div class="copyright">
-                <p>CopyRight© 2018 All Rights Reserved.广东工业大学版权所有</p>
-                <p>粤ICP备14022647号-1</p>
+                <span>CopyRight© 2018 All Rights Reserved.广东工业大学版权所有</span><br>
+                <span>粤ICP备14022647号-1</span>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
 // import {mapGetters} from 'vuex'
 import { routes } from '@/router'
 import { navigate } from '@/directives.js'
-import { NAVS } from '@/api/navs'
+import { NAVS } from '@/config/navs.js'
 
 export default {
   name: 'Footer',
@@ -88,6 +88,9 @@ export default {
 
 <style lang="stylus" scoped>
 /* 页脚 */
+.footer
+  text-align center
+
 .index-show .friendship-link
   display block
 
@@ -182,6 +185,10 @@ export default {
 
 .footer-second
   // background url('../img/footer_bg.png') repeat
+  // display block
+  position relative
+  margin 0 auto
+  text-align center
   overflow hidden
 
 .footer-second .content
@@ -211,5 +218,6 @@ export default {
   font-size 14px
 
 .copyright
+  text-align center
   line-height 48px
 </style>

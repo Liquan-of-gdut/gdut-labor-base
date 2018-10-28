@@ -1,5 +1,6 @@
 #content
   min-height 550px
+  overflow hidden // comment：此处很重要，当子元素浮动时，父元素高度会塌陷，此时给父元素设置‘overflow： hidden’可解决该问题
 .margin-right
   margin-right 15px
 
@@ -35,7 +36,6 @@ div.bread-nav
   display block
   height 50px
   line-height 50px
-  color #1f1f1f
   font-size 16px
   text-align center
   cursor pointer
@@ -43,6 +43,10 @@ div.bread-nav
 .left-nav .navSub-list li.active
   color #38C3F4
 
+.active-nav
+  color #38C3F4
+  font-weight: bold;
+  opacity: 1;
 /* 详情 */
 .detail
   float left
@@ -50,13 +54,20 @@ div.bread-nav
   padding-left 40px
   box-sizing border-box
   padding-bottom 40px
-
-.detail .title
-  font-size 18px
-  color #1f1f1f
-  margin-bottom 20px
-  text-align center
-
+  .title
+    font-size 22px
+    color #1f1f1f
+    margin-bottom 20px
+    text-align center
+  p
+    text-indent 2em
+    text-align: justify
+  img
+    width 690px
+    height: auto
+    margin-top 30px
 .description
   word-break break-all
   line-height 30px
+
+

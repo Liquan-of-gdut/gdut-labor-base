@@ -2,31 +2,30 @@
   <div id="content" class="content">
     <div class="bread-nav">
       <span>当前位置： </span>
-      <span> 首页 > </span>
-      <span>{{`${this.$route.params.nav} > `}}</span>
-      <span>{{ this.$route.params.navSub }}</span>
+      <span style="color: #00aae7; cursor: pointer;"
+       @click="$router.push({name: 'Home', params: {nav: 'home'}})"> 首页 </span>
+      <span>{{setBreadNav()}}</span>
     </div>
     <div class="left-nav">
-      <h2 class="title">基地概况</h2>
-      <ul class="navSub-list">
-        <li class="navSub-item" v-for="(item, idx) in navSubList" :key="idx">
+      <h2 class="title">{{navParent}}</h2>
+      <ul v-if="navSubList" class="navSub-list">
+        <li v-for="(item, subIdx) in navSubList" :key="subIdx"
+         :class="['navSub-item', {'active-nav': subIdx === activeNavSubIdx}]"
+         @click="setActiveNavSub(subIdx)">
           {{item}}
+        </li>
+      </ul>
+      <ul v-else class="navSub-list">
+        <li class="navSub-item active-nav">
+          {{navParent}}
         </li>
       </ul>
     </div>
     <div class="detail">
-      <h2 class="title">广东工业大学实训基地简介</h2>
-      <div class="description">
+      <h2 class="title">{{dataList.title}}</h2>
+      <div v-html="dataList.description" class="description">
         <p style="color:#3E3E3E;font-family:&quot;font-size:15px;text-align:justify;">
-          <span style="font-size:18px;">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;广州国家现代服务业集成电路设计产业化基地（以下简称“广州IC基地”），为国家科技部2010年批准建设，
-            于2012年4月落地成立，是全国十个国家级的集成电路设计高新技术产业化基地之一。<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;自成立以来，广州国家IC基地致力于面向物联网、互联网、大数据、
-            云计算、智能机器人等产业的芯片设计及产品应用研发服务，系统集成互联网开发等领域创新资源聚集和服务能力建设，建立完善的产业培育与项目孵化体系。
-            截至目前，广州国家IC基地已初步建成了集成电路设计EDA公共服务平台、仿真验证技术实验室、集成电路产品质量监督检验中心、高端应用电子芯片协同创新中心，
-            可为集成电路设计相关企业提供完整的集成电路设计工具及其运行环境支持，先进工艺全流程的集成电路设计服务、MPW流片服务，IP开发、交易、集成等技术咨询服务，
-            产品检测试验、分析评价、认证计量服务等。<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;同时，广州国家IC基地还注重人才队伍建设，集聚了一批面向物联网、互联网、大数据、云计算、智能机器人等产业的芯片
-            设计及产品应用研发创新团队和企业。成立以来，广州国家IC基地已累计孵化相关企业/项目157家/项，培育新三板上市企业2家、预备上市企业2家，国家高新技术企业
-            14家、高新企业培育入库2家，广州市科技小巨人企业认定9家，累计总产值超20亿元。
-          </span>
+          {{dataList.description}}
         </p>
       </div>
     </div>
@@ -34,15 +33,62 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+import { NAVS } from '@/config/navs.js'
+import { getDataList } from '@/config/index.js'
 
 export default {
   name: 'Content',
   data: () => ({
-    navSubList: ['基地简介', '学校简介', '企业资质', '基地共建协议']
+    navParent: '',
+    navSubList: [],
+    dataList: {}
   }),
+  created () {
+    this.navParent = NAVS[this.activeNavIdx].nav.CH
+    this.navSubList = NAVS[this.activeNavIdx].navSubs
+  },
+  computed: {
+    ...mapState({
+      activeNavIdx: state => state.activeNavIdx,
+      activeNavSubIdx: state => state.activeNavSubIdx
+    }),
+    handleNavChange () {
+      return [
+        this.activeNavIdx,
+        this.activeNavSubIdx
+      ]
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setActiveNavSub: 'SET_ACTIVE_NAV_SUB'
+    }),
+    setDataList () {
+      // 更新数据 ： 根据当前“navIdx、navSubIdx”更新当前的数据列表
+      // 暂时不将数据独立出来，所以当前navIdx === 0 时，结束
+      this.navParent = NAVS[this.activeNavIdx].nav.CH
+      this.navSubList = NAVS[this.activeNavIdx].navSubs
+      this.dataList = getDataList(this.activeNavIdx, this.activeNavSubIdx)
+    },
+    setBreadNav () {
+      if (!this.activeNavIdx) {
+        return
+      }
+      let navTitle = ` > ${NAVS[this.activeNavIdx].nav.CH}`
+      let navSubTitle = ''
+      if (NAVS[this.activeNavIdx].navSubs) {
+        navSubTitle = ` > ${NAVS[this.activeNavIdx].navSubs[this.activeNavSubIdx]}`
+      }
+      return navTitle + navSubTitle
+    }
+  },
   watch: {
-    '$route': function () {
-      console.log('当前位置：', `${this.$route.params.nav} > ${this.$route.params.navSub}`)
+    'handleNavChange': {
+      handler () {
+        this.setDataList()
+      },
+      immediate: true // 当页面刷新（第一次绑定时），也将调用“数据更新函数”
     }
   }
 }

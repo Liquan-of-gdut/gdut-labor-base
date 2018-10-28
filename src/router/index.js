@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import store from '../store'
+import store from '../store'
+import { NAVS } from '@/config/navs.js'
 
 Vue.use(Router)
 
@@ -27,7 +28,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // TODO：设置当前父导航（TODO：父导航的State值通过数值index设置即可）
   // TODO：参数中存在时设置当前子导航，不存在时则默认第一个子导航（TODO：子导航的State值通过数值index设置即可）
-  console.log('当前路由参数：', to.params)
+  // 根据路由名计算当前 activeNavIdx ：一层遍历
+  NAVS.forEach((item, idx) => {
+    if (item.nav.EN === to.params.nav) {
+      store.commit('SET_ACTIVE_NAV', idx)
+    }
+  })
   next()
 })
 

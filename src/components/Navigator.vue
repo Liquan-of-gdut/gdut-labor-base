@@ -4,20 +4,15 @@
     <div class="container">
       <img src="@/assets/school-logo.png" alt="广东工业大学实训基地" class="nav-logo"
        v-navigate="`/Home`">
-      <!-- <v-nav :navs='navs' :active-idx="activeIdx" @setActiveNav='navigate'>
-        <template slot-scope="{nav}">
-          {{nav.meta.title}}
-        </template>
-      </v-nav> -->
       <ul class="nav-list">
-        <li :class="['nav-parent', {'active-nav': focusIdx === idx}]"
-         v-for="(navItem, idx) in navs"
-         @click="navigate(navItem, idx)" :key="idx">
+        <li :class="['nav-parent', {'active-nav': activeNavIdx === parentIdx}]"
+         v-for="(navItem, parentIdx) in navs"
+         @click="navigate(navItem, parentIdx, 0)" :key="parentIdx">
           <i>{{navItem.nav.CH}}</i>
-        <ol v-if="navItem.navSubs" class="nav-list-child">
-          <li v-for="(navSub, idx) in navItem.navSubs" :key="idx"
-           :class="['nav-child', {'active-nav': focusIdx === idx}]"
-           @click="navigate(navItem, idx, navSub)">
+        <ol v-if="navItem.navSubs && navItem.navSubs.length > 1" class="nav-list-child">
+          <li v-for="(navSub, subIdx) in navItem.navSubs" :key="subIdx"
+           :class="['nav-child', {'active-nav': subIdx === activeNavSubIdx}]"
+           @click="navigate(navItem, parentIdx, subIdx)">
             <i>{{navSub}}</i>
           </li>
         </ol>
@@ -27,10 +22,10 @@
   </div>
 </template>
 <script>
-// import {mapGetters} from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { routes } from '@/router'
 import { navigate } from '@/directives.js'
-import { NAVS } from '@/api/navs'
+import { NAVS } from '@/config/navs.js'
 
 export default {
   name: 'Navigator',
@@ -44,55 +39,34 @@ export default {
     console.log('navs:', this.navs)
   },
   computed: {
+    ...mapState({
+      activeNavIdx: state => state.activeNavIdx,
+      activeNavSubIdx: state => state.activeNavSubIdx
+    }),
     activeIdx () {
       return this.navs.findIndex(i => i.title === this.$route.meta.title)
     }
-    // ...mapGetters(['scrollTop'])
   },
   methods: {
-    navigate (navItem, idx, navSub = '') {
-      this.focusIdx = idx // 设置当前活跃导航
-      if (idx === 0) { // 当点击 ’首页‘ 时
+    ...mapMutations({
+      setActiveNav: 'SET_ACTIVE_NAV',
+      setActiveNavSub: 'SET_ACTIVE_NAV_SUB'
+    }),
+    navigate (navItem, parentIdx, subIdx) {
+      this.setActiveNav(parentIdx) // 设置当前活跃导航
+      this.setActiveNavSub(subIdx)
+      if (parentIdx === 0) { // 当点击 ’首页‘ 时
         this.$router.push(`/Home`)
         return
       }
-      if (!navSub && navItem.navSubs) { // 假如导航没有 子导航时
-        navSub = navItem.navSubs[0]
-      }
-      this.activeChildren = navSub // 当前活跃 子导航
       let nav = navItem.nav.EN
       this.$router.push({ // content页的跳转
         name: 'Content',
         params: {
-          nav,
-          navSub
+          nav
         }
       })
     }
-    // clearChildren () {
-    //   this.activeChildren = ''
-    // },
-    // showChildren ({name}) {
-    //   this.activeChildren = name
-    // },
-    // displayNav (el) {
-    //   el = el || window.event
-    //   if (el.wheelDelta) {
-    //     el.wheelDelta > 0 ? this.navFixFlag = true : this.navFixFlag = false
-    //   } else if (el.detail) {
-    //     if (window.navigator.userAgent.indexOf('Firefox') !== -1) {
-    //       el.detail < 0 ? this.navFixFlag = true : this.navFixFlag = false
-    //     } else {
-    //       el.detail > 0 ? this.navFixFlag = true : this.navFixFlag = false
-    //     }
-    //   }
-    // },
-    // handleEvent () {
-    //   if (document.addEventListener) {
-    //     document.addEventListener('DOMMouseScroll', this.displayNav, false)
-    //   }
-    //   window.onmousewheel = document.onmousewheel = this.displayNav
-    // }
   },
   directives: {
     navigate

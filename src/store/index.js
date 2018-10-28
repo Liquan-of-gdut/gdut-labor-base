@@ -6,6 +6,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    activeNavIdx: 0,
+    activeNavSubIdx: 0
   },
   mutations,
   actions,

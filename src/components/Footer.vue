@@ -32,7 +32,7 @@
 </template>
 <script>
 // import {mapGetters} from 'vuex'
-import { routes } from '@/router'
+// import { routes } from '@/router'
 import { navigate } from '@/directives.js'
 import { NAVS } from '@/config/navs.js'
 
@@ -44,9 +44,6 @@ export default {
     navFixFlag: false,
     focusIdx: null
   }),
-  created () {
-    console.log('navs:', this.navs)
-  },
   computed: {
     activeIdx () {
       return this.navs.findIndex(i => i.title === this.$route.meta.title)
@@ -78,9 +75,9 @@ export default {
     navigate
   },
   mounted () {
-    console.log('route:', routes)
-    console.log('navs:', this.navs)
-    this.focusIdx = this.activeIdx
+    // console.log('route:', routes)
+    // console.log('navs:', this.navs)
+    // this.focusIdx = this.activeIdx
     // this.handleEvent()
   }
 }

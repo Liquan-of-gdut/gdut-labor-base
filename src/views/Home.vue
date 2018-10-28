@@ -14,7 +14,7 @@
                 <div class="news left">
                     <div class="box border-radius">
                         <h2 class="module-title news-header">
-                            <a href="#">基地动态 >></a>
+                            <a href="#" onclick="return false">基地动态 >></a>
                             <a href="#" class="icon-more"></a>
                         </h2>
                         <div class="news-section">
@@ -107,7 +107,7 @@
                 </div>
                 <div class="notice right border-radius margin-bottom">
                     <h2 class="module-title notice-header">
-                        <a href="#">实践教学 >></a>
+                        <a href="#" onclick="return false">实践教学 >></a>
                         <a href="#" class="icon-more"></a>
                     </h2>
                     <div class="notice-section">
@@ -181,13 +181,13 @@
             <!--焦点关注-->
             <div class="focus border-radius margin-bottom">
                 <h2 class="module-title title">
-                    <a href="#">课程建设 >></a>
-                    <a href="#" class="more">更多&gt;</a>
+                    <a href="#" onclick="return false">课程建设 >></a>
+                    <!-- <a href="#" class="more">更多&gt;</a> -->
                 </h2>
                 <ul class="focus-list">
                     <!--ms-for:(index,n) in focusList-->
                     <li class="odd">
-                        <a target="_blank" href="#">
+                        <a href="#" onclick="return false">
                             <p class="summary" ms-html="n.summary"></p>
                             <!-- <p class="img-box">
                             <img onerror="this.src=&#39;../img/default.png&#39;" src="./index_files/1747375871550.png">
@@ -200,7 +200,7 @@
                     </li>
                     <!--for942335416348-->
                     <li class="even">
-                        <a target="_blank" href="#">
+                        <a onclick="return false" href="#">
                             <p class="summary" ms-html="n.summary"></p>
                             <!-- <p class="img-box">
                             <img onerror="this.src=&#39;../img/default.png&#39;" src="./index_files/0811370517290.png">
@@ -212,7 +212,7 @@
                     </li>
                     <!--for942335416348-->
                     <li class="odd">
-                        <a target="_blank" href="#">
+                        <a onclick="return false" href="#">
                             <p class="summary" ms-html="n.summary"></p>
                             <!-- <p class="img-box">
                             <img onerror="this.src=&#39;../img/default.png&#39;" src="./index_files/1118482810093.png">
@@ -224,7 +224,7 @@
                     </li>
                     <!--for942335416348-->
                     <li class="even margin0">
-                        <a target="_blank" href="#">
+                        <a onclick="return false" href="#">
                             <p class="summary" ms-html="n.summary"></p>
                             <!-- <p class="img-box">
                             <img onerror="this.src=&#39;../img/default.png&#39;" src="./index_files/0730486246391.png">

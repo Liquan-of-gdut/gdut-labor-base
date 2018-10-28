@@ -3,12 +3,11 @@
     <div class="nav-bgcolor"></div>
     <div class="container">
       <img src="@/assets/school-logo.png" alt="广东工业大学实训基地" class="nav-logo"
-       v-navigate="`/Home`">
+        @click="$router.push({name: 'Home', params: {nav: 'home'}})">
       <ul class="nav-list">
         <li :class="['nav-parent', {'active-nav': activeNavIdx === parentIdx}]"
-         v-for="(navItem, parentIdx) in navs"
-         @click="navigate(navItem, parentIdx, 0)" :key="parentIdx">
-          <i>{{navItem.nav.CH}}</i>
+         v-for="(navItem, parentIdx) in navs" :key="parentIdx">
+          <i @click="navigate(navItem, parentIdx, 0)">{{navItem.nav.CH}}</i>
         <ol v-if="navItem.navSubs && navItem.navSubs.length > 1" class="nav-list-child">
           <li v-for="(navSub, subIdx) in navItem.navSubs" :key="subIdx"
            :class="['nav-child', {'active-nav': subIdx === activeNavSubIdx}]"
@@ -23,7 +22,7 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { routes } from '@/router'
+// import { routes } from '@/router'
 import { navigate } from '@/directives.js'
 import { NAVS } from '@/config/navs.js'
 
@@ -53,7 +52,8 @@ export default {
       setActiveNavSub: 'SET_ACTIVE_NAV_SUB'
     }),
     navigate (navItem, parentIdx, subIdx) {
-      this.setActiveNav(parentIdx) // 设置当前活跃导航
+      // this.setActiveNav(parentIdx) // 设置当前活跃导航
+      console.log('subIdx: ', subIdx)
       this.setActiveNavSub(subIdx)
       if (parentIdx === 0) { // 当点击 ’首页‘ 时
         this.$router.push(`/Home`)
@@ -72,9 +72,9 @@ export default {
     navigate
   },
   mounted () {
-    console.log('route:', routes)
-    console.log('navs:', this.navs)
-    this.focusIdx = this.activeIdx
+    // console.log('route:', routes)
+    // console.log('navs:', this.navs)
+    // this.focusIdx = this.activeIdx
     // this.handleEvent()
   }
 }

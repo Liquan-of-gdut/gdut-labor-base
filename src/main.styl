@@ -1,3 +1,235 @@
+*
+  font-family 'Microsoft YaHei'
+
+html, body
+  font-family 'Microsoft YaHei'
+  padding 0
+  margin 0
+  color #1f1f1f
+  font-size 14px
+
+a
+  text-decoration none
+
+ol, ul, li
+  margin 0
+  padding 0
+  list-style-type none
+
+img
+  border 0
+
+h1, h2, h3, h4, h5, h6, p
+  margin 0
+
+i
+  font-style normal
+
+.loading
+  display -webkit-box
+  -webkit-box-pack justify
+  width 60px
+  height 20px
+  margin 10px auto
+  border 0 !important
+
+.loading span
+  display block
+  width 8px
+  height 100%
+  border-radius 4px
+  background lightgreen
+  -webkit-animation load 1s ease infinite
+  animation load 1s ease infinite
+
+@keyframes load
+  0%, 100%
+    height 20px
+    background lightgreen
+
+  50%
+    height 50px
+    margin -15px 0
+    background lightblue
+
+.loading span:nth-child(2)
+  -webkit-animation-delay 0.2s
+  animation-delay 0.2s
+
+.loading span:nth-child(3)
+  -webkit-animation-delay 0.4s
+  animation-delay 0.4s
+
+.loading span:nth-child(4)
+  -webkit-animation-delay 0.6s
+  animation-delay 0.6s
+
+.loading span:nth-child(5)
+  -webkit-animation-delay 0.8s
+  animation-delay 0.8s
+
+.margin-bottom
+  margin-bottom 15px !important
+
+.left
+  float left
+
+.right
+  float right
+
+.container
+  width 62.5%
+  min-width 1200px
+  margin 0 auto
+  overflow hidden
+
+/* 导航 */
+.header
+  background-color #fff
+
+.header .nav-top
+  padding 30px 0
+  height 180px
+  box-sizing border-box
+  overflow hidden
+
+.header .nav-top .left img
+  display block
+  -webkit-user-select none
+
+.header .nav-top .right
+  padding 0
+
+.header .nav-top .right .label-box
+  display inline-block
+  height 44px
+  margin-right 12px
+  overflow hidden
+  vertical-align middle
+
+.header .nav-top .right .label-box .input-search
+  float left
+  display block
+  width 200px
+  height 100%
+  padding 10px
+  box-sizing border-box
+  border 2px solid #00AAE7
+  border-right 0
+  outline none
+  vertical-align middle
+
+.header .nav-top .right .label-box .btn
+  float left
+  display block
+  width 100px
+  height 100%
+  border 0
+  border-radius 0
+  font-size 16px
+  word-spacing 2px
+  color #fff
+  background-color #00AAE7
+  vertical-align middle
+  outline none
+  cursor pointer
+
+.header .nav-top .right .label-box .btn:active
+  background-color #38C3F4
+
+.header .nav-top .right img
+  vertical-align middle
+  width 120px
+
+.header .nav
+  display inline-block
+  width 100%
+  color #fff
+  background-color #00AAE7
+  vertical-align middle
+
+.header .nav .container
+  overflow visible
+
+.header .nav img
+  float left
+  max-width 80px
+  height 65px
+  margin-right 70px
+  overflow hidden
+
+.header .nav .nav-list
+  height 65px
+  overflow visible
+
+.header .nav .nav-list li
+  position relative
+  float left
+  width 105px
+  height 65px
+  line-height 65px
+  text-align center
+
+.header .nav .nav-list li a
+  display block
+  width 100%
+  height 100%
+  font-size 16px
+  color #fff
+  white-space nowrap
+  transition all 0.2s
+
+.header .nav .nav-list li.active a
+  background-color #38C3F4
+
+.header .nav .nav-list li:hover a
+  background-color #38C3F4
+
+.header .nav .nav-list li:hover .nav-list-child
+  max-height 500px
+  transition all 0.8s
+
+.header .nav .nav-list li .nav-list-child
+  position absolute
+  top 65px
+  left 0
+  width auto
+  min-width 100%
+  max-height 0
+  overflow hidden
+  z-index 999
+
+.header .nav .nav-list li .nav-list-child li
+  width 105px
+  padding 0
+  text-align center
+  box-sizing border-box
+  background-color #38C3F4
+
+.header .nav .nav-list li .nav-list-child li a
+  border-top 1px solid #04B5F4
+  box-sizing border-box
+  color #016FB5
+  overflow hidden
+  text-overflow ellipsis
+
+.header .nav .nav-list li .nav-list-child li:hover a
+  color #fff
+
+.header .banner
+  overflow hidden
+  background #00AAE7
+
+.header .banner img
+  display block
+  margin 0px auto
+
+.header .banner-nav
+  min-width 1200px
+
+.header .banner-nav img
+  display block
+
 html, body, h1, h2, h3, h4, p, form, ul, li, a, span, i
   margin 0
   padding 0
@@ -34,6 +266,11 @@ a:hover
   width 1200px
   margin 0 auto
 
+.full-width {
+  width: 100%;
+  min-width: 1300px;
+}
+
 .container
   width 62.5%
   min-width 1200px
@@ -44,7 +281,7 @@ a:hover
   zoom 1
 
 .banner
-  @include full-width    // background: #eee;
+  @include full-width // background: #eee;
 
 .clear-margin-right
   margin-right 0 !important
